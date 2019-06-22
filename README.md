@@ -1,34 +1,39 @@
 # Flask Rest Api Test
 
-Hosted on [https://suhasflask.herokuapp.com/](https://suhasflask.herokuapp.com/)
+Hosted on [https://suhasfyle.herokuapp.com/](https://suhasfyle.herokuapp.com/)
 
 # Check with Curl
 ```
-$ curl https://suhasflask.herokuapp.com/ifsc/<string:ifsc_code>
+$ curl https://suhasfyle.herokuapp.com/ifsc/<string:ifsc_code>
+
+$ curl https://suhasfyle.herokuapp.com/branchlist/?bank=<string:bank_name>&branch=<string:branch_name>&limit=<int:limit_number>&offset=<int:offset_number>
 
 Example:
 
-http post http://127.0.0.1:8000/api/token/ username=visitor password=123
+$ http post https://suhasfyle.herokuapp.com/api/token/ username=visitor password=123
 HTTP/1.1 200 OK
 Allow: POST, OPTIONS
+Connection: keep-alive
 Content-Length: 438
 Content-Type: application/json
-Date: Sat, 22 Jun 2019 09:49:00 GMT
-Server: WSGIServer/0.2 CPython/3.6.8
-Vary: Accept
+Date: Sat, 22 Jun 2019 11:29:05 GMT
+Server: gunicorn/19.9.0
+Vary: Accept, Origin
+Via: 1.1 vegur
 X-Frame-Options: SAMEORIGIN
 
 {
-    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU2MTI4Mzc1MywianRpIjoiOWM2OTg4OWIwNmNjNDc0YjlkN2YzYzRmZTE5MjgyODUiLCJ1c2VyX2lkIjoxfQ.sam5mXrfyzoZr4O98QlBiZoO2S6dnQkXMiapGacggGw",
-    "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTYxMTk3NjUzLCJqdGkiOiI0NzU1NTM3NjQxNGM0M2E0OTAzOTY2M2QxNTc4NzZjMSIsInVzZXJfaWQiOjF9.WFda72NnegYJzrag-ExJQP5QlrWcaOVkNlZgddQ3hic"
+    "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTYxMjAzMjQ1LCJqdGkiOiI5ZmZmMTYwYTFkMmU0MTBkODkwNWIxMDAzODhmYjg4NyIsInVzZXJfaWQiOjF9.Ly7ZIwEekgM3lbTUrA6zFvTjcYYnb_wGlh9qerH4GZQ",
+    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU2MTI4OTM0NSwianRpIjoiZmYyOWIzNGRhMGUyNDZjNjhiZGNkYTFkZGRmYWExYzEiLCJ1c2VyX2lkIjoxfQ.ZtEC8xlgvFp8ygdc4H3RIYdnq3AYgf2X0DQnRFV3x0U"
 }
 
-$ curl --location --request GET "localhost:8000/ifsc/abhy0065004" \
->   --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTYxMTk3NjUzLCJqdGkiOiI0NzU1NTM3NjQxNGM0M2E0OTAzOTY2M2QxNTc4NzZjMSIsInVzZXJfaWQiOjF9.WFda72NnegYJzrag-ExJQP5QlrWcaOVkNlZgddQ3hic" | jq
+
+
+$ curl --location --request GET "https://suhasfyle.herokuapp.com/ifsc/abhy0065004" --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTYxMjAzMjQ1LCJqdGkiOiI5ZmZmMTYwYTFkMmU0MTBkODkwNWIxMDAzODhmYjg4NyIsInVzZXJfaWQiOjF9.Ly7ZIwEekgM3lbTUrA6zFvTjcYYnb_wGlh9qerH4GZQ" | jq
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-100   181  100   181    0     0     18      0  0:00:10  0:00:10 --:--:--    47
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+100   181  100   181    0     0    121      0  0:00:01  0:00:01 --:--:--   121
 {
   "ifsc": "ABHY0065004",
   "branch": "BHANDUP",
@@ -39,13 +44,13 @@ $ curl --location --request GET "localhost:8000/ifsc/abhy0065004" \
   "bank": 60
 }
 
-$ curl --location --request GET "localhost:8000/branchlist/?bank=hdfc+bank&branch=mumbai"   --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTYxMTk3NjUzLCJqdGkiOiI0NzU1NTM3NjQxNGM0M2E0OTAzOTY2M2QxNTc4NzZjMSIsInVzZXJfaWQiOjF9.WFda72NnegYJzrag-ExJQP5QlrWcaOVkNlZgddQ3hic" | jq
+$ curl --location --request GET "https://suhasfyle.herokuapp.com/branchlist/?bank=hdfc+bank&branch=mumbai"   --header "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTYxMjAzMjQ1LCJqdGkiOiI5ZmZmMTYwYTFkMmU0MTBkODkwNWIxMDAzODhmYjg4NyIsInVzZXJfaWQiOjF9.Ly7ZIwEekgM3lbTUrA6zFvTjcYYnb_wGlh9qerH4GZQ" | jq
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  2374  100  2374    0     0    114      0  0:00:20  0:00:20 --:--:--   524
+100  2384  100  2384    0     0   1791      0  0:00:01  0:00:01 --:--:--  1791
 {
   "count": 193,
-  "next": "http://localhost:8000/branchlist/?bank=hdfc+bank&branch=mumbai&limit=10&offset=10",
+  "next": "https://suhasfyle.herokuapp.com/branchlist/?bank=hdfc+bank&branch=mumbai&limit=10&offset=10",
   "previous": null,
   "results": [
     {
