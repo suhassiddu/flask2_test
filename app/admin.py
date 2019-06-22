@@ -10,5 +10,5 @@ class BankAdmin(admin.ModelAdmin):
 class BranchAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(Bank, BankAdmin)
-admin.site.register(Branch, BranchAdmin)
+admin.site.register(Banks, BankAdmin)
+admin.site.register(Branches, BranchAdmin)
